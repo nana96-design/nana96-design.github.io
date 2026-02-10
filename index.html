@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>내 개인 홈페이지 - 스마트 달력</title>
+  
   <style>
     :root {
       --primary-color: #4834d4;
@@ -21,17 +22,16 @@
     .calendar { width: 100%; border-collapse: collapse; table-layout: fixed; margin-bottom: 20px; border-radius: 10px; overflow: hidden; }
     .calendar th, .calendar td { border: 1px solid #f1f1f1; padding: 15px 5px; text-align: center; position: relative; }
     
-    /* 헤더 스타일 (오타 수정됨) */
+    /* 요청하신 헤더 디자인 */
     .calendar th { background-color: #f2f2f2; font-weight: bold; }
     
     .calendar td { cursor: pointer; height: 65px; vertical-align: top; }
-    .calendar td:hover:not(.empty) { background: #fdfdfd; transform: scale(1.01); transition: 0.1s; }
+    .calendar td:hover:not(.empty) { background: #fdfdfd; transform: scale(1.01); }
 
-    /* 날짜별 색상 상속 */
     .sun { color: #e74c3c; } 
     .sat { color: #0984e3; }
     
-    /* 공휴일 스타일 (방금 알려주신 코드 반영) */
+    /* 공휴일 배경 디자인 */
     .holiday { 
       color: red !important; 
       font-weight: bold; 
@@ -76,20 +76,11 @@
   </div>
 
   <script>
-    // 2026년 공휴일 데이터 (원하는 날짜를 계속 추가할 수 있어요!)
     const holidays = {
-      "2026-1-1": "신정",
-      "2026-2-16": "설날 연휴",
-      "2026-2-17": "설날",
-      "2026-2-18": "설날 연휴",
-      "2026-3-1": "삼일절",
-      "2026-5-5": "어린이날",
-      "2026-5-24": "부처님오신날",
-      "2026-6-6": "현충일",
-      "2026-8-15": "광복절",
-      "2026-10-3": "개천절",
-      "2026-10-9": "한글날",
-      "2026-12-25": "크리스마스"
+      "2026-1-1": "신정", "2026-2-16": "설날 연휴", "2026-2-17": "설날",
+      "2026-2-18": "설날 연휴", "2026-3-1": "삼일절", "2026-5-5": "어린이날",
+      "2026-5-24": "부처님오신날", "2026-6-6": "현충일", "2026-8-15": "광복절",
+      "2026-10-3": "개천절", "2026-10-9": "한글날", "2026-12-25": "크리스마스"
     };
 
     let currentDate = new Date();
@@ -120,11 +111,10 @@
             const isToday = new Date().toLocaleDateString() === new Date(year, month, day).toLocaleDateString();
             const isHoliday = holidays[dateKey];
             
-            // 클래스 설정
             let classes = [];
-            if (j === 0 || isHoliday) classes.push('sun'); // 일요일 혹은 공휴일은 빨간색
+            if (j === 0 || isHoliday) classes.push('sun');
             if (j === 6) classes.push('sat');
-            if (isHoliday) classes.push('holiday'); // 분홍색 배경 추가
+            if (isHoliday) classes.push('holiday');
             if (isToday) classes.push('today');
 
             const hasMemo = localStorage.getItem(dateKey);
